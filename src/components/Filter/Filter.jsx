@@ -1,6 +1,8 @@
-import PropTypes from 'prop-types';
-
-export const Filter = ({ filter, onChange }) => {
+import { useDispatch } from 'react-redux';
+import { setFilter } from 'redux/actions';
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const handleFilterChange = e => dispatch(setFilter(e.target.value));
   return (
     <>
       <label htmlFor="findName" className="form-label">
@@ -10,16 +12,11 @@ export const Filter = ({ filter, onChange }) => {
         id="findName"
         type="text"
         name="filter"
-        value={filter}
-        onChange={onChange}
+        onChange={handleFilterChange}
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
       />
     </>
   );
-};
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
